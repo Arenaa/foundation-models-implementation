@@ -1,3 +1,3 @@
-# pytorch-from-scratch
+# PyTorch Model Implementations from Scratch
 
-This repo contains my implementation for different models from scratch in pytorch.
+This repository features my custom implementations of various models using PyTorch. Dive in to explore and learn more about these unique model.
