@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torchvision.transform as transforms
+import torchvision.transforms as transforms
 from torch.utils.tensorboard import SummaryWriter
-from utils import save_checkpoint, load_checkpoints, print_examples
+from torch.utils import save_checkpoint, load_checkpoints, print_examples
 from loader import get_loader
 from model import CNNtoRNN
 
