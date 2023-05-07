@@ -1,10 +1,13 @@
 import os
 import pandas as pd
-from spacy import *
+import spacy
 import torch
+import torchvision.transforms as transforms
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
+
+spacy_eng = spacy.load("en")
 
 class Vocabulary:
     def __init__(self, freq_threshold):
@@ -94,4 +97,16 @@ def get_loader(
         num_worker=8,
         shuffle=True
 ):
-    pass
+    dataset = FlickerDataset(root_dir, annotation_file, transform=transform)
+
+    pad_idx = dataset.vocab.stoi["<PAD>"]
+
+    loader = DataLoader(
+        dataset=dataset,
+        batch_size=batch_size,
+        num_workers=num_worker,
+        shuffle=shuffle,
+        collate_fn=MyCollate(pad_idx=pad_idx)
+    )
+    return loader, dataset
+
