@@ -6,14 +6,12 @@ import torchvision.transforms as transforms
 import torchvision.models as models
 from torchvision.utils import save_image
 
-model = models.vgg19(pretrained=True).features
-
 class VGG(nn.Module):
     def __init__(self):
         super().__init__()
 
         self.chosen_features = ["0", "5", "10", "19", "28"]
-        self.model = models.vgg19(pretrained=True).features[:29]
+        self.model = models.vgg19().features[:29]
 
     def forward(self, x):
         features = []
@@ -58,8 +56,8 @@ for step in range(toral_steps):
 
     style_loss = original_loss = 0
 
-    for gen_feature, orig_feature, style_Feature in zip(
-        generated_features, original_img_features, style_Feature
+    for gen_feature, orig_feature, style_features in zip(
+        generated_features, original_img_features, style_features
     ):
         batch_Size, channels, height, width= gen_feature.shape
         original_loss += torch.mean((gen_feature - orig_feature) ** 2)
@@ -72,7 +70,7 @@ for step in range(toral_steps):
             style_features.view(channels, height*width).t()
         )
 
-        style_loss += torch.mean((G - A)**@)
+        style_loss += torch.mean((G - A)**2)
 
     total_loss = alpha * original_loss + beta * style_loss
     optimizer.zero_grad()
