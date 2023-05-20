@@ -1,12 +1,17 @@
+import random
+
+import numpy as np
+import spacy
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torchtext.datasets import Multi30k
-from torchtext.data import Field, BucketIterator
-import numpy as np
-import spacy
-import random
+import torchtext
 from torch.utils.tensorboard import SummaryWriter
+from torchtext import data, datasets
+from torchtext.legacy.data import BucketIterator, Field
+from torchtext.datasets import Multi30k
+
+from data import BucketIterator
 
 # Download these spacy packages
 # python -m spacy download de_core_news_sm
