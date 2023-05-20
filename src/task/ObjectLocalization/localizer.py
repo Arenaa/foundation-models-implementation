@@ -97,8 +97,8 @@ def valid_fn(model, dataloader, optimizer):
 
 if __name__ == "__main__":
 
-    CSV_FILE = '/data/object-localization-dataset/train.csv'
-    DATA_DIR = '/data/object-localization-dataset'
+    CSV_FILE = 'src/data/object-localization-dataset/train.csv'
+    DATA_DIR = 'src/data/object-localization-dataset'
 
     DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
     BATCH_SIZE = 16
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     LR = 0.001
     EPOCHS = 40
-    MODEL_NAME = 'efficient_b0'
+    MODEL_NAME = 'efficientnet_b0'
 
     NUM_COR = 4
 
