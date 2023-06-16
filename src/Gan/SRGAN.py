@@ -73,7 +73,7 @@ class Generator(nn.Module):
           return torch.tanh(self.final(x))
 
 class Discriminator(nn.Module):
-    def __init__(self, in_channels=3, features=[64, 64, 128, 128, 256, 256, 512, 512])
+    def __init__(self, in_channels=3, features=[64, 64, 128, 128, 256, 256, 512, 512]):
         super().__init__()
         blocks = []
         for idx, feature in enumerate(features):
