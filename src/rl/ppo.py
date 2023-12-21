@@ -72,14 +72,25 @@ if __name__ == "__main__":
     observation = env.reset()
     episodic_return = 0
 
-    for _ in range(200):
-        action = env.action_space.sample()
-        observation, reward, done, info = env.step(action)
-        episodic_return += reward
-        if done:
-            observation = env.reset()
-            episodic_return = 0
-    env.close()
+    agent = Agent(envs)
+    optimizer = optim.Adam(agent.parameters(), lr=args.learning_rate, eps=1e-5)
+
+    obs = torch.zeros(args.num_steps, args.num_envs) + envs.single_observation_space
+    actions = torch.zeros(args.num_steps, args.num_envs) + envs.single_observation_space
+    logprobs = torch.zeros(args.num_steps, args.num_envs) + envs.single_observation_space
+    rewards = torch.zeros(args.num_steps, args.num_envs) + envs.single_observation_space
+    dones = torch.zeros(args.num_steps, args.num_envs) + envs.single_observation_space
+    values = torch.zeros(args.num_steps, args.num_envs) + envs.single_observation_space
+
+    globa_step = 0
+    start_time = time.time()
+    next_obs = torch.Tensor(envs.reset())
+    next_done = torch.zeros(args.num_envs)
+    num_updates = args.total_timestamp // args.batch_size
+
+    
+
+
 
 
 
